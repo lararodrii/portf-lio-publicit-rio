@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landy's Portfolio - Final Wave</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        body {
+            margin: 0;
+            background: #fff;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: #000;
+            color: #fff;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3000;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover { color: #E64398; }
+
+        nav { display: flex; gap: 30px; }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+        nav a:hover { color: #E64398; }
+
+        /* --- SEÇÃO DO TOPO --- */
+        .hero-section {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: #fff;
+            z-index: 10;
+        }
+
+        #stage-hero { display: block; width: 100%; height: 100%; }
+
+        /* --- BARRA PRETA --- */
+        .cta-bar {
+            background-color: #000;
+            width: 100%;
+            padding: 80px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            z-index: 20;
+            border-top: 2px solid white;
+        }
+
+        .cta-text {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: #fff;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .cta-bar:hover .cta-text { color: #E64398; }
+
+        /* --- SEÇÃO DO PORTFÓLIO --- */
+        .portfolio-section {
+            position: relative;
+            width: 100%;
+            min-height: 130vh; 
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #kinetic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .cards-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 60px 20px;
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(2px);
+            border-radius: 30px;
+        }
+
+        .card {
+            background: #000;
+            width: 320px;
+            height: 420px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .card:hover { transform: translateY(-15px); }
+        .card.art { border: 12px solid #0090D4; }
+        .card.foto { border: 12px solid #E64398; }
+        .card.flyer { border: 12px solid #F8CF2C; }
+
+        .card h2 {
+            font-family: 'Anton', sans-serif;
+            color: #fff;
+            font-size: 3.5rem;
+            margin: 0 0 30px 0;
+            text-align: center;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Garante que o título fique em uma única linha */
+            white-space: nowrap;
+        }
+
+        .btn-ver-mais {
+            background: #fff;
+            color: #000;
+            padding: 12px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-ver-mais:hover { background: #eee; }
+        .bottom-bar { width: 100%; height: 40px; background: #000; position: relative; z-index: 20; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">LANDY'S PORTFOLIO</a>
+        <nav>
+            <a href="#">TRABALHOS</a>
+            <a href="#">SOBRE MIM</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <canvas id="stage-hero"></canvas>
+    </section>
+
+    <div class="cta-bar" onclick="document.querySelector('.portfolio-section').scrollIntoView({behavior: 'smooth'})">
+        <span class="cta-text">CLIQUE PARA COMEÇAR</span>
+    </div>
+
+    <section class="portfolio-section">
+        <canvas id="kinetic-bg"></canvas>
+
+        <div class="cards-container">
+            <div class="card art">
+                <h2>ART WORK</h2>
+                <a href="#" class="btn-ver-mais">VER MAIS</a>
+            </div>
+            <div class="card foto">
+                <h2>FOTOGRAFIA</h2>
+                <a href="#" class="btn-ver-mais">VER MAIS</a>
+            </div>
+            <div class="card flyer">
+                <h2>FLYERS</h2>
+                <a href="#" class="btn-ver-mais">VER MAIS</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="bottom-bar"></div>
+
+    <script>
+        /* ------------------------------------------------------------------
+           SCRIPT 1: SEU EFEITO ORIGINAL (Túnel - Mantido igual)
+           ------------------------------------------------------------------ */
+        const canvasHero = document.getElementById('stage-hero');
+        const ctxHero = canvasHero.getContext('2d');
+        const TEXT_LINES = ["CRIATIVIDADE", "SEM", "HIERARQUIA"];
+        const PALETTE = ["#F8CF2C", "#E64398", "#0090D4", "#59AD46"];
+        const FONT_SIZE_VW = 10.0; 
+        const BASE_LETTER_SPACING = -0.02; const LINE_HEIGHT = 0.90; const LETTER_THICKNESS = 2; const EXTRA_SPACING_WAVE = 0.15; const VERTICAL_EXPLOSION = 120; const WAVE_DELAY_CHARS = 150; const WAVE_DELAY_LINES = 200; const TUNNEL_STEPS = 45; const MAX_DEPTH = 0.35; const SPEED_FACTOR = 0.0015; const ZOOM_INTENSITY = 0.5; const CENTER_OFFSET_Y = 40;
+        let wHero, hHero, cxHero, cyHero, fontSizeHero; let lastTimestampHero = 0; let elapsedHero = 0;
+
+        function resizeHero() {
+            const dpr = window.devicePixelRatio || 1;
+            wHero = window.innerWidth; hHero = window.innerHeight;
+            canvasHero.width = wHero * dpr; canvasHero.height = hHero * dpr;
+            ctxHero.scale(dpr, dpr);
+            cxHero = wHero / 2; cyHero = (hHero / 2) + CENTER_OFFSET_Y;
+            fontSizeHero = (wHero * FONT_SIZE_VW) / 100;
+            ctxHero.font = `${fontSizeHero}px "Anton"`;
+            ctxHero.textAlign = "center"; ctxHero.textBaseline = "middle"; ctxHero.lineJoin = "round";
+        }
+        function getLayoutHero(currentTime) {
+            const layout = []; const lineHeightPx = fontSizeHero * LINE_HEIGHT; const startY = cyHero - lineHeightPx;
+            TEXT_LINES.forEach((text, lineIndex) => {
+                const baseY = startY + (lineIndex * lineHeightPx); let totalLinePixels = 0; const charsInLine = [];
+                for (let i = 0; i < text.length; i++) {
+                    const centerIndex = (text.length - 1) / 2; const distFromCenter = Math.abs(i - centerIndex);
+                    const charTime = (currentTime * SPEED_FACTOR) - (distFromCenter * (WAVE_DELAY_CHARS / 1000)) - (Math.abs(lineIndex - 1) * (WAVE_DELAY_LINES / 1000));
+                    let rawSine = Math.sin(charTime); let pulse = rawSine > 0 ? (1 - Math.cos(rawSine * Math.PI)) / 2 : 0;
+                    const charWidth = ctxHero.measureText(text[i]).width; const dynamicSpacing = fontSizeHero * (BASE_LETTER_SPACING + (pulse * EXTRA_SPACING_WAVE));
+                    charsInLine.push({ char: text[i], width: charWidth, spacing: dynamicSpacing, pulse, lineIndex }); totalLinePixels += charWidth + (i < text.length - 1 ? dynamicSpacing : 0);
+                }
+                let currentX = cxHero - (totalLinePixels / 2);
+                charsInLine.forEach((data, i) => {
+                    const charCenterX = currentX + (data.width / 2);
+                    let yOffset = (data.lineIndex === 0) ? -data.pulse * VERTICAL_EXPLOSION : (data.lineIndex === 2) ? data.pulse * VERTICAL_EXPLOSION : 0;
+                    layout.push({ ...data, x: charCenterX, y: baseY + yOffset, color: PALETTE[(i + lineIndex) % PALETTE.length] }); currentX += data.width + data.spacing;
+                });
+            }); return layout;
+        }
+        function animateHero(timestamp) {
+            if (!lastTimestampHero) lastTimestampHero = timestamp; elapsedHero += timestamp - lastTimestampHero; lastTimestampHero = timestamp;
+            ctxHero.clearRect(0, 0, wHero, hHero); const currentLayout = getLayoutHero(elapsedHero);
+            currentLayout.forEach(data => {
+                const depth = data.pulse * MAX_DEPTH; const zoom = 1 + (data.pulse * ZOOM_INTENSITY);
+                if (depth > 0.001) {
+                    for (let s = 1; s <= TUNNEL_STEPS; s++) {
+                        const t = s / TUNNEL_STEPS; const layerDepth = t * depth;
+                        ctxHero.globalAlpha = (0.9 - (t * 0.4)) * data.pulse; ctxHero.fillStyle = ctxHero.strokeStyle = data.color; ctxHero.lineWidth = LETTER_THICKNESS;
+                        const scale = zoom * (1 - layerDepth); ctxHero.save();
+                        ctxHero.translate(data.x + (cxHero - data.x) * layerDepth, data.y + (cyHero - data.y) * layerDepth);
+                        ctxHero.scale(scale, scale); ctxHero.strokeText(data.char, 0, 0); ctxHero.fillText(data.char, 0, 0); ctxHero.restore();
+                    }
+                }
+            });
+            ctxHero.globalAlpha = 1.0; ctxHero.fillStyle = ctxHero.strokeStyle = "black"; ctxHero.lineWidth = LETTER_THICKNESS;
+            currentLayout.forEach(data => {
+                const zoom = 1 + (data.pulse * ZOOM_INTENSITY); ctxHero.save();
+                ctxHero.translate(data.x, data.y); ctxHero.scale(zoom, zoom); ctxHero.strokeText(data.char, 0, 0); ctxHero.fillText(data.char, 0, 0); ctxHero.restore();
+            }); requestAnimationFrame(animateHero);
+        }
+
+        /* ------------------------------------------------------------------
+           SCRIPT 2: FUNDO DE ONDA - FAIXAS GROSSAS E FONTE FINA
+           ------------------------------------------------------------------ */
+        const canvasBg = document.getElementById('kinetic-bg');
+        const ctxBg = canvasBg.getContext('2d');
+        const textWave = "AQUI TUDO É POSSÍVEL "; 
+        let wBg, hBg;
+
+        function resizeBg() {
+            const parent = canvasBg.parentElement;
+            wBg = parent.offsetWidth;
+            hBg = parent.offsetHeight;
+            canvasBg.width = wBg * devicePixelRatio;
+            canvasBg.height = hBg * devicePixelRatio;
+            ctxBg.scale(devicePixelRatio, devicePixelRatio);
+        }
+
+        function animateBg(time) {
+            // 1. Limpa o fundo com branco
+            ctxBg.fillStyle = "#ffffff";
+            ctxBg.fillRect(0,0, wBg, hBg);
+
+            // 2. Configurações para faixas grossas e fonte fina
+            const rows = 7; // Menos linhas = faixas mais grossas
+            const rowHeight = hBg / rows;
+            // Usando peso 300 (Light) da Oswald. Tamanho proporcional à faixa.
+            ctxBg.font = `300 ${rowHeight * 0.85}px "Oswald"`; 
+            ctxBg.textBaseline = "middle";
+            
+            for (let i = 0; i < rows; i++) {
+                // Calcula o centro vertical da faixa atual
+                const centerY = (i * rowHeight) + (rowHeight / 2);
+
+                // --- PARÂMETROS DA ONDA ---
+                // Onda horizontal forte
+                const waveX = Math.sin(time * 0.002 + i * 0.6) * 200; 
+                // Onda vertical sutil para movimento orgânico, mas sem pular a faixa
+                const waveY = Math.sin(time * 0.0025 + i * 0.9) * 25;
+
+                ctxBg.save();
+                
+                // --- A CORREÇÃO PRINCIPAL ---
+                // Translada a origem do desenho PARA a posição da onda.
+                // A faixa e o texto serão desenhados relativos a essa nova origem.
+                ctxBg.translate(waveX - (wBg/2), centerY + waveY); 
+
+                if (i % 2 === 0) {
+                    // --- Faixa Preta ---
+                    ctxBg.fillStyle = "#000000";
+                    // Desenha o retângulo da faixa centralizado na nova origem.
+                    // Largura extra para cobrir o movimento horizontal.
+                    ctxBg.fillRect(-wBg, -rowHeight/2 - 1, wBg * 4, rowHeight + 2); 
+                    ctxBg.fillStyle = "#ffffff"; // Texto Branco
+                } else {
+                    // --- Faixa Branca (o fundo já é branco) ---
+                    ctxBg.fillStyle = "#000000"; // Texto Preto
+                }
+
+                // Desenha o texto na origem (0,0), que já está se movendo junto com a faixa.
+                const line = textWave.repeat(15); // Repete bastante para cobrir a largura
+                ctxBg.fillText(line, 0, 0);
+                
+                ctxBg.restore();
+            }
+            requestAnimationFrame(animateBg);
+        }
+
+        /* INICIALIZAÇÃO */
+        window.addEventListener('resize', () => { resizeHero(); resizeBg(); });
+        document.fonts.ready.then(() => {
+            resizeHero();
+            resizeBg();
+            requestAnimationFrame(animateHero);
+            requestAnimationFrame(animateBg);
+        });
+    </script>
+</body>
+
+</html>
