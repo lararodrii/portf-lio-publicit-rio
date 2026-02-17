@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork - Landy's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #fff;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 110px;
+            background: #000;
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3000;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-family: 'Anton';
+            font-size: 4rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: Arial;
+            font-size: 1.3rem;
+        }
+
+        .content-wrapper {
+            padding: 150px 5vw 100px 5vw;
+        }
+
+        .page-title {
+            font-family: 'Anton';
+            font-size: 5rem;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .art-item {
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .art-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.4s;
+        }
+
+        .art-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+
+            /* 1. Vacuum / Global Reset */
+            html,
+            body {
+                overflow-x: hidden !important;
+                width: 100%;
+                position: relative;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .cursor {
+                display: none !important;
+            }
+
+            /* Header Fixes */
+            header {
+                height: 80px;
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .content-wrapper {
+                padding: 100px 20px 60px 20px;
+            }
+
+            .page-title {
+                font-size: 3rem;
+            }
+
+            .art-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* 1 COLUNA NO MOBILE */
+            .art-item {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <header>
+        <a href="index.html" class="logo">LANDY'S</a>
+        <nav><a href="index.html">VOLTAR</a></nav>
+    </header>
+    <div class="content-wrapper">
+        <h1 class="page-title">ART WORK</h1>
+        <div class="art-grid">
+            <div class="art-item"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"
+                    alt="Art"></div>
+            <div class="art-item"><img src="https://images.unsplash.com/photo-1574169208507-843761948786?w=600"
+                    alt="Art"></div>
+            <div class="art-item"><img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600" alt="Art">
+            </div>
+            <div class="art-item"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=600" alt="Art">
+            </div>
+        </div>
+    </div>
+    <script>
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove", e => { cursor.style.left = e.clientX + "px"; cursor.style.top = e.clientY + "px"; });
+    </script>
+</body>
+
+</html>
