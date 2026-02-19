@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mim - Samantha Rodrigues</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oswald:wght@400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'ugly';
+            src: url('ugly-betty-vol-0-2.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #fff;
+            color: #000;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* --- CURSOR --- */
+        .cursor {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            background-color: #445AF4; border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            mix-blend-mode: exclusion;
+            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s;
+        }
+        .cursor.grow { width: 60px; height: 60px; background: transparent; border: 2px solid #445AF4; }
+
+        @media (hover: none) { .cursor { display: none; } body { cursor: auto; } }
+
+        /* --- NAVBAR --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+            background: #445AF4; color: #fff; padding: 0 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 3000; 
+            border-bottom: 1px solid #fff; 
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'ugly', sans-serif; font-size: 2.5rem;
+            text-decoration: none; color: #fff;
+        }
+
+        nav { display: flex; gap: 40px; }
+        
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 1rem; 
+            text-transform: uppercase; 
+            transition: color 0.3s; 
+        }
+        
+        nav a:hover { color: #000; }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            position: relative; 
+            width: 100%; 
+            min-height: 70vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin-top: 90px; 
+            background: #fff;
+            z-index: 20; 
+            padding-bottom: 50px;
+        }
+
+        .info-card {
+            position: relative; 
+            z-index: 2; 
+            background-color: #fff;
+            padding: 50px 60px; 
+            max-width: 800px; 
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            opacity: 0;
+            text-align: center;
+        }
+
+        .info-card h1 {
+            font-family: 'ugly', sans-serif; 
+            font-size: 4.5rem;
+            text-transform: uppercase; 
+            line-height: 1; 
+            margin-bottom: 10px;
+        }
+
+        .info-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        .info-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem; 
+            line-height: 1.6; 
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .info-card .quote {
+            color: #445AF4; 
+            font-family: 'ugly', sans-serif;
+            font-size: 2rem; 
+            margin-top: 30px;
+            display: block;
+            line-height: 1.2;
+        }
+
+        /* --- TÍTULO AZUL --- */
+        .software-title-strip {
+            width: 100%; 
+            background-color: #445AF4; 
+            padding: 40px 0; 
+            display: flex; 
+            justify-content: center;
+            position: relative; 
+            z-index: 25; 
+        }
+
+        .section-title {
+            font-family: 'ugly', sans-serif; 
+            font-size: 3rem; 
+            color: #fff; 
+            text-transform: uppercase;
+        }
+
+        /* --- WRAPPER --- */
+        .bottom-content-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden; 
+            min-height: 80vh; 
+        }
+
+        /* --- ÍCONES --- */
+        .software-icons-area {
+            position: relative; 
+            z-index: 20; 
+            padding: 60px 0; 
+            display: flex; 
+            justify-content: center;
+            background: transparent; 
+        }
+
+        .icons-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border: 2.5px solid #eee;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: #ccc;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+            cursor: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .app-icon:hover {
+            color: #445AF4; 
+            border-color: #445AF4; 
+            filter: grayscale(0%);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(68, 90, 244, 0.2);
+        }
+
+        /* --- ESPIRAIS (CONFIGURAÇÃO DESKTOP) --- */
+        .spirals-background {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; /* Fica atrás de tudo */
+            pointer-events: none;
+        }
+
+        .spiral-svg {
+            position: absolute; 
+            width: 160vh; 
+            height: 160vh; 
+            top: -30%; 
+        }
+        .spiral-svg path { fill: #445AF4; } 
+
+        @keyframes spin-spiral {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spiral-left { 
+            left: -60vh; 
+            animation: spin-spiral 40s linear infinite; 
+        }
+        
+        .spiral-right { 
+            right: -60vh; 
+            animation: spin-spiral 45s linear infinite reverse; 
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            position: relative; 
+            z-index: 50; /* Garante que fique SOBRE as espirais */
+            padding: 50px 20px 100px 20px;
+            display: flex; flex-direction: column; align-items: center;
+            margin-top: 50px; 
+        }
+
+        .footer-title {
+            font-family: 'ugly', sans-serif; font-size: 3rem;
+            color: #445AF4; margin-bottom: 50px;
+            text-align: center; text-transform: uppercase;
+        }
+
+        .contact-links { 
+            display: flex; gap: 60px; flex-wrap: wrap; justify-content: center;
+        }
+
+        .contact-item {
+            text-decoration: none; color: #000; 
+            font-family: 'Oswald', sans-serif; font-weight: 400;
+            display: flex; flex-direction: column; align-items: center; 
+            gap: 15px; transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover { transform: translateY(-5px); color: #445AF4; }
+
+        .contact-icon {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: #445AF4; display: flex; justify-content: center; 
+            align-items: center; box-shadow: 0 5px 15px rgba(68, 90, 244, 0.3);
+            transition: background 0.3s;
+        }
+
+        .contact-item:hover .contact-icon { background: #000; }
+        .contact-icon svg { width: 32px; height: 32px; fill: #fff; }
+        .contact-item span { font-size: 1.1rem; letter-spacing: 0.5px; }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo { font-size: 2rem; }
+            nav { gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+            .hero-section {
+                padding-top: 160px;
+                align-items: center;
+                margin-top: 0;
+            }
+
+            .info-card {
+                padding: 40px 25px;
+                width: 90%;
+            }
+            .info-card h1 { font-size: 3rem; line-height: 1.1; }
+
+            .software-title-strip { padding: 20px 10px; }
+            .section-title {
+                font-size: 1.5rem;
+                line-height: 1.2;
+                text-align: center;
+            }
+
+            .icons-grid { gap: 15px; }
+            
+            /* ESPIRAIS NO MOBILE - AJUSTADAS PARA FICAREM GRANDES E GIRANDO */
+            .spiral-svg { 
+                width: 160vw; /* Aumentado para 160% da largura da tela */
+                height: 160vw; 
+                top: -10%; 
+                opacity: 0.5; /* Transparência para não brigar com o texto */
+            }
+            .spiral-left { 
+                left: -70vw; /* Posicionada na borda esquerda */
+                animation: spin-spiral 40s linear infinite; /* Garante que gira */
+            }
+            .spiral-right { 
+                right: -70vw; /* Posicionada na borda direita */
+                display: block; 
+                animation: spin-spiral 45s linear infinite reverse; /* Garante que gira ao contrário */
+            }
+
+            .contact-links { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <header>
+        <a href="index.html" class="logo hover-target">MEU PORTFOLIO :)</a>
+        <nav>
+            <a href="index.html#portfolio" class="hover-target">TRABALHOS</a>
+            <a href="sobre.html" class="hover-target">SOBRE MIM</a>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="info-card hover-target">
+            <h1>SAMANTHA RODRIGUES</h1>
+            <h3>Designer Gráfica.</h3>
+            <p>Crio conteúdos, projetos e narrativas visuais que dão forma às ideias.</p>
+            <p class="quote">"Acredito que tudo é arte.<br>E que o design é a forma de tornar visível aquilo que antes era apenas intenção."</p>
+        </div>
+    </section>
+
+    <div class="software-title-strip">
+        <h2 class="section-title hover-target">SOFTWARES QUE EU TRABALHO:</h2>
+    </div>
+
+    <div class="bottom-content-wrapper">
+        
+        <div class="spirals-background">
+            <svg viewBox="0 0 994 720" class="spiral-svg spiral-left"><g transform="translate(0,720) scale(0.1,-0.1)"><path d="M4408 5370 c-274 -44 -686 -181 -717 -238 -9 -18 -8 -23 8 -32 30 -16 102 4 321 86 264 99 356 118 580 118 205 0 300 -16 520 -90 151 -51 270 -110 362 -180 350 -266 587 -632 667 -1029 34 -170 44 -312 38 -544 -7 -260 -28 -397 -92 -587 -118 -354 -308 -619 -569 -793 -299 -199 -575 -282 -936 -282 -180 0 -319 18 -505 66 -214 55 -457 154 -581 237 -135 90 -383 373 -508 580 -98 162 -145 352 -153 623 -12 362 64 679 218 915 267 409 649 639 1279 771 207 44 445 27 666 -47 204 -68 515 -236 610 -329 51 -51 184 -244 268 -391 94 -165 120 -289 121 -569 0 -275 -37 -480 -130 -731 -175 -466 -454 -702 -951 -803 -358 -73 -821 -24 -1094 114 -218 111 -404 295 -519 515 -98 187 -141 -365 -141 580 0 253 69 487 201 681 42 63 379 387 473 456 113 83 306 161 509 205 85 19 132 22 287 22 166 -1 195 -3 281 -26 410 -110 684 -395 796 -828 79 -305 12 -738 -157 -1019 -132 -220 -258 -323 -520 -424 -153 -59 -174 -65 -320 -82 -339 -40 -505 -10 -719 132 -232 154 -440 441 -517 712 -25 88 -26 102 -21 260 2 91 10 191 17 221 53 242 134 388 282 507 152 122 323 210 508 260 249 67 601 29 807 -88 178 -101 297 -325 338 -636 40 -308 -10 -528 -176 -768 -160 -232 -388 -331 -748 -324 -65 1 -124 -1 -131 -6 -7 -4 -15 -2 -20 4 -4 7 -41 27 -82 45 -161 70 -268 154 -347 271 -81 122 -125 271 -137 470 -13 228 67 425 235 576 108 98 256 169 423 203 154 32 212 24 416 -56 151 -60 199 -117 272 -323 64 -181 78 -252 68 -335 -14 -122 -57 -300 -88 -367 -95 -207 -356 -298 -633 -221 -181 50 -344 176 -411 319 -56 117 -83 332 -56 431 14 49 115 175 182 229 143 114 414 175 533 120 82 -37 160 -166 189 -313 18 -89 21 -285 5 -343 -62 -221 -385 -249 -585 -49 -68 68 -90 133 -80 236 9 84 21 123 54 167 48 64 143 86 263 60 38 -8 60 -20 83 -46 56 -62 68 -92 64 -158 -8 -140 -98 -207 -199 -147 -57 33 -78 117 -37 146 34 24 78 20 110 -11 35 -34 37 -12 3 33 -44 57 -122 54 -181 -7 -78 -81 22 -241 161 -256 81 -10 159 57 191 163 31 104 7 199 -62 249 -22 16 -53 43 -70 61 -58 60 -183 65 -303 13 -108 -46 -154 -139 -155 -309 -1 -117 20 -167 105 -252 141 -139 376 -186 535 -108 74 36 116 81 157 169 27 56 31 79 35 171 5 133 -17 234 -83 367 -107 217 -247 293 -455 249 -199 -42 -452 -220 -518 -364 -53 -117 -39 -351 27 -467 16 -27 48 -85 71 -127 105 -194 333 -318 586 -318 130 0 189 12 289 60 124 59 208 149 262 282 35 87 72 243 79 335 6 76 5 84 -19 126 -17 28 -31 72 -37 116 -18 128 -96 299 -161 355 -21 18 -51 39 -66 46 -15 8 -69 38 -119 67 -135 79 -191 96 -294 90 -91 -6 -244 -42 -350 -84 -191 -76 -376 -255 -453 -439 -66 -156 -75 -398 -23 -598 42 -160 94 -255 201 -362 78 -79 104 -98 195 -143 157 -77 233 -94 420 -95 169 0 228 10 367 64 141 54 256 142 352 269 154 203 212 364 213 586 0 281 -34 500 -98 628 -38 74 -229 263 -316 311 -152 84 -332 129 -513 129 -177 -1 -360 -52 -572 -158 -152 -77 -263 -157 -358 -257 -108 -112 -162 -232 -204 -451 -28 -143 -45 -350 -32 -390 6 -18 22 -75 36 -127 52 -189 181 -414 318 -552 148 -150 340 -271 497 -315 92 -25 392 -25 500 1 41 10 98 22 125 27 210 37 451 172 613 343 159 168 260 368 314 619 28 134 31 376 5 517 -24 128 -76 281 -138 400 -167 325 -458 526 -849 585 -395 60 -841 -68 -1090 -314 -47 -46 -134 -121 -195 -166 -127 -93 -176 -146 -239 -253 -204 -349 -247 -772 -115 -1136 70 -193 167 -342 320 -491 191 -185 416 -300 690 -352 137 -25 531 -25 684 0 345 58 530 148 741 361 233 235 376 529 446 916 8 47 13 148 12 270 0 221 -17 323 -79 497 -54 153 -217 417 -336 547 -176 192 -488 362 -774 421 -120 25 -319 30 -444 11 -390 -60 -798 -200 -1000 -343 -200 -143 -402 -388 -516 -626 -105 -218 -143 -375 -152 -612 -9 -250 27 -445 127 -687 97 -237 208 -402 404 -602 127 -131 137 -137 446 -264 223 -92 372 -142 515 -172 127 -27 375 -37 498 -21 331 44 725 216 978 427 131 109 197 198 299 402 226 454 294 934 199 1412 -45 226 -119 393 -262 590 -46 63 -121 167 -166 230 -170 235 -263 307 -554 427 -280 115 -432 152 -637 158 -80 2 -171 0 -202 -5z"/></g></svg>
+            <svg viewBox="0 0 994 720" class="spiral-svg spiral-right"><g transform="translate(0,720) scale(0.1,-0.1)"><path d="M4408 5370 c-274 -44 -686 -181 -717 -238 -9 -18 -8 -23 8 -32 30 -16 102 4 321 86 264 99 356 118 580 118 205 0 300 -16 520 -90 151 -51 270 -110 362 -180 350 -266 587 -632 667 -1029 34 -170 44 -312 38 -544 -7 -260 -28 -397 -92 -587 -118 -354 -308 -619 -569 -793 -299 -199 -575 -282 -936 -282 -180 0 -319 18 -505 66 -214 55 -457 154 -581 237 -135 90 -383 373 -508 580 -98 162 -145 352 -153 623 -12 362 64 679 218 915 267 409 649 639 1279 771 207 44 445 27 666 -47 204 -68 515 -236 610 -329 51 -51 184 -244 268 -391 94 -165 120 -289 121 -569 0 -275 -37 -480 -130 -731 -175 -466 -454 -702 -951 -803 -358 -73 -821 -24 -1094 114 -218 111 -404 295 -519 515 -98 187 -141 -365 -141 580 0 253 69 487 201 681 42 63 379 387 473 456 113 83 306 161 509 205 85 19 132 22 287 22 166 -1 195 -3 281 -26 410 -110 684 -395 796 -828 79 -305 12 -738 -157 -1019 -132 -220 -258 -323 -520 -424 -153 -59 -174 -65 -320 -82 -339 -40 -505 -10 -719 132 -232 154 -440 441 -517 712 -25 88 -26 102 -21 260 2 91 10 191 17 221 53 242 134 388 282 507 152 122 323 210 508 260 249 67 601 29 807 -88 178 -101 297 -325 338 -636 40 -308 -10 -528 -176 -768 -160 -232 -388 -331 -748 -324 -65 1 -124 -1 -131 -6 -7 -4 -15 -2 -20 4 -4 7 -41 27 -82 45 -161 70 -268 154 -347 271 -81 122 -125 271 -137 470 -13 228 67 425 235 576 108 98 256 169 423 203 154 32 212 24 416 -56 151 -60 199 -117 272 -323 64 -181 78 -252 68 -335 -14 -122 -57 -300 -88 -367 -95 -207 -356 -298 -633 -221 -181 50 -344 176 -411 319 -56 117 -83 332 -56 431 14 49 115 175 182 229 143 114 414 175 533 120 82 -37 160 -166 189 -313 18 -89 21 -285 5 -343 -62 -221 -385 -249 -585 -49 -68 68 -90 133 -80 236 9 84 21 123 54 167 48 64 143 86 263 60 38 -8 60 -20 83 -46 56 -62 68 -92 64 -158 -8 -140 -98 -207 -199 -147 -57 33 -78 117 -37 146 34 24 78 20 110 -11 35 -34 37 -12 3 33 -44 57 -122 54 -181 -7 -78 -81 22 -241 161 -256 81 -10 159 57 191 163 31 104 7 199 -62 249 -22 16 -53 43 -70 61 -58 60 -183 65 -303 13 -108 -46 -154 -139 -155 -309 -1 -117 20 -167 105 -252 141 -139 376 -186 535 -108 74 36 116 81 157 169 27 56 31 79 35 171 5 133 -17 234 -83 367 -107 217 -247 293 -455 249 -199 -42 -452 -220 -518 -364 -53 -117 -39 -351 27 -467 16 -27 48 -85 71 -127 105 -194 333 -318 586 -318 130 0 189 12 289 60 124 59 208 149 262 282 35 87 72 243 79 335 6 76 5 84 -19 126 -17 28 -31 72 -37 116 -18 128 -96 299 -161 355 -21 18 -51 39 -66 46 -15 8 -69 38 -119 67 -135 79 -191 96 -294 90 -91 -6 -244 -42 -350 -84 -191 -76 -376 -255 -453 -439 -66 -156 -75 -398 -23 -598 42 -160 94 -255 201 -362 78 -79 104 -98 195 -143 157 -77 233 -94 420 -95 169 0 228 10 367 64 141 54 256 142 352 269 154 203 212 364 213 586 0 281 -34 500 -98 628 -38 74 -229 263 -316 311 -152 84 -332 129 -513 129 -177 -1 -360 -52 -572 -158 -152 -77 -263 -157 -358 -257 -108 -112 -162 -232 -204 -451 -28 -143 -45 -350 -32 -390 6 -18 22 -75 36 -127 52 -189 181 -414 318 -552 148 -150 340 -271 497 -315 92 -25 392 -25 500 1 41 10 98 22 125 27 210 37 451 172 613 343 159 168 260 368 314 619 28 134 31 376 5 517 -24 128 -76 281 -138 400 -167 325 -458 526 -849 585 -395 60 -841 -68 -1090 -314 -47 -46 -134 -121 -195 -166 -127 -93 -176 -146 -239 -253 -204 -349 -247 -772 -115 -1136 70 -193 167 -342 320 -491 191 -185 416 -300 690 -352 137 -25 531 -25 684 0 345 58 530 148 741 361 233 235 376 529 446 916 8 47 13 148 12 270 0 221 -17 323 -79 497 -54 153 -217 417 -336 547 -176 192 -488 362 -774 421 -120 25 -319 30 -444 11 -390 -60 -798 -200 -1000 -343 -200 -143 -402 -388 -516 -626 -105 -218 -143 -375 -152 -612 -9 -250 27 -445 127 -687 97 -237 208 -402 404 -602 127 -131 137 -137 446 -264 223 -92 372 -142 515 -172 127 -27 375 -37 498 -21 331 44 725 216 978 427 131 109 197 198 299 402 226 454 294 934 199 1412 -45 226 -119 393 -262 590 -46 63 -121 167 -166 230 -170 235 -263 307 -554 427 -280 115 -432 152 -637 158 -80 2 -171 0 -202 -5z"/></g></svg>
+        </div>
+
+        <div class="software-icons-area">
+            <div class="icons-grid">
+                <div class="app-icon hover-target">Ps</div>
+                <div class="app-icon hover-target">Ai</div>
+                <div class="app-icon hover-target">Id</div>
+                <div class="app-icon hover-target">Cap</div>
+            </div>
+        </div>
+
+        <footer>
+            <h2 class="footer-title hover-target">VAMOS CONVERSAR?</h2>
+            <div class="contact-links">
+                
+                <a href="https://wa.me/5561995878170" target="_blank" class="contact-item hover-target">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.8 69.7 27.2 106.2 27.2h.1c122.3 0 222-99.6 222-222 0-59.3-23-115.1-65.1-157.1z"/></svg>
+                    </div>
+                    <span>(61) 99587-8170</span>
+                </a>
+
+                <a href="https://www.instagram.com/samanthardgss/" target="_blank" class="contact-item hover-target">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                    </div>
+                    <span>@samanthardgss</span>
+                </a>
+
+                <a href="mailto:samanthardgs98@gmail.com" class="contact-item hover-target">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48z"/></svg>
+                    </div>
+                    <span>samanthardgs98@gmail.com</span>
+                </a>
+
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px"; cursor.style.top = e.clientY + "px";
+        });
+        document.querySelectorAll(".hover-target, a, .app-icon, .contact-item").forEach(t => {
+            t.addEventListener("mouseenter", () => cursor.classList.add("grow"));
+            t.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
+        });
+
+        gsap.fromTo(".info-card", 
+            { x: "-100vw", opacity: 0 }, 
+            { duration: 4, x: "0", opacity: 1, ease: "power2.out" }
+        );
+
+        gsap.from(".app-icon", {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: ".software-icons-area",
+                start: "top 85%",
+            },
+            onComplete: function() {
+                gsap.set(".app-icon", { clearProps: "all" });
+            }
+        });
+    </script>
+</body>
+</html>

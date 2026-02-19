@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEU PORTFÓLIO :)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'ugly';
+            src: url('ugly-betty-vol-0-2.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* --- GLOBAL --- */
+        body {
+            margin: 0;
+            background: #fff; /* Fundo Branco (Modo Claro) */
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: #000; /* Texto Preto */
+            cursor: none;
+        }
+
+        /* --- CURSOR (Desktop Only) --- */
+        .cursor {
+            position: fixed;
+            top: 0; left: 0; width: 20px; height: 20px;
+            background-color: #445AF4; border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            mix-blend-mode: exclusion;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+        .cursor.grow { width: 60px; height: 60px; background: transparent; border: 2px solid #445AF4; }
+
+        @media (hover: none) and (pointer: coarse) {
+            .cursor { display: none; }
+            body { cursor: auto; }
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+            background: #445AF4; color: #fff;
+            padding: 0 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 3000; box-sizing: border-box;
+            border-bottom: 1px solid #fff;
+        }
+
+        .logo {
+            font-family: 'ugly', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none; color: #fff; line-height: 1;
+        }
+
+        nav { display: flex; gap: 40px; }
+        nav a {
+            color: #fff; text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: #000; }
+
+        /* --- GALERIA --- */
+        .gallery-wrapper {
+            padding: 180px 5vw 100px 5vw;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .page-title {
+            font-family: 'ugly', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-align: center; margin-bottom: 80px;
+            color: #445AF4; /* Título em Azul */
+        }
+
+        .parallax-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .gallery-col {
+            width: 33.33%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            will-change: transform;
+        }
+
+        /* Coluna do meio deslocada no Desktop */
+        .gallery-col:nth-child(2) { margin-top: 100px; }
+
+        .image-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0; /* Fundo cinza claro para placeholder */
+        }
+
+        .image-container img {
+            width: 100%; height: auto; display: block;
+            filter: grayscale(100%);
+            transition: 0.4s ease;
+        }
+
+        /* --- HOVER EFFECTS (Desktop) --- */
+        @media (hover: hover) {
+            .image-container:hover img {
+                filter: grayscale(0%);
+                transform: scale(1.05);
+            }
+        }
+
+        /* --- RESPONSIVIDADE (NAV) --- */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                padding: 20px;
+                flex-direction: column; /* Empilha logo e menu */
+                gap: 15px;
+            }
+
+            .logo { 
+                font-size: clamp(1.8rem, 6vw, 2.5rem); 
+                white-space: nowrap; /* CORREÇÃO: Impede que o texto quebre */
+            }
+            
+            nav { gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+            .gallery-wrapper { padding-top: 140px; padding-bottom: 60px; }
+            
+            .parallax-grid {
+                flex-direction: column; 
+                gap: 30px;
+            }
+            
+            .gallery-col {
+                width: 100%;
+                margin-top: 0 !important;
+            }
+            
+            .image-container img { filter: grayscale(0%); } 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+
+    <header>
+        <a href="index.html" class="logo hover-target">MEU PORTFÓLIO :)</a>
+        <nav>
+            <a href="index.html#work" class="hover-target">TRABALHOS</a>
+            <a href="sobre.html" class="hover-target">SOBRE MIM</a>
+        </nav>
+    </header>
+
+    <div class="gallery-wrapper">
+        <h1 class="page-title hover-target">MÍDIA OFF</h1>
+
+        <div class="parallax-grid">
+
+            <div class="gallery-col col-fast">
+                <div class="image-container hover-target"><img src="images/fly1.jpeg" alt="Art 1"></div>
+                <div class="image-container hover-target"><img src="images/fly4.jpeg" alt="Art 4"></div>
+                <div class="image-container hover-target"><img src="images/fly7.jpeg" alt="Art 7"></div>
+                <div class="image-container hover-target"><img src="images/fly10.jpeg" alt="Art 10"></div>
+                <div class="image-container hover-target"><img src="images/fly13.jpeg" alt="Art 13"></div>
+            </div>
+
+            <div class="gallery-col col-slow">
+                <div class="image-container hover-target"><img src="images/fly2.jpeg" alt="Art 2"></div>
+                <div class="image-container hover-target"><img src="images/fly5.jpeg" alt="Art 5"></div>
+                <div class="image-container hover-target"><img src="images/fly8.jpeg" alt="Art 8"></div>
+                <div class="image-container hover-target"><img src="images/fly11.jpeg" alt="Art 11"></div>
+                <div class="image-container hover-target"><img src="images/fly1.jpeg" alt="Art 1b"></div>
+            </div>
+
+            <div class="gallery-col col-fast">
+                <div class="image-container hover-target"><img src="images/fly3.jpeg" alt="Art 3"></div>
+                <div class="image-container hover-target"><img src="images/fly6.jpeg" alt="Art 6"></div>
+                <div class="image-container hover-target"><img src="images/fly9.jpeg" alt="Art 9"></div>
+                <div class="image-container hover-target"><img src="images/fly12.jpeg" alt="Art 12"></div>
+                <div class="image-container hover-target"><img src="images/fly2.jpeg" alt="Art 2b"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- CURSOR ---
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+
+        const targets = document.querySelectorAll(".hover-target, a, .image-container");
+        targets.forEach(t => {
+            t.addEventListener("mouseenter", () => cursor.classList.add("grow"));
+            t.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
+        });
+
+        // --- PARALLAX RESPONSIVO ---
+        ScrollTrigger.matchMedia({
+            "(min-width: 901px)": function() {
+                gsap.to(".col-fast", {
+                    y: -150,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".gallery-wrapper",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+
+                gsap.to(".col-slow", {
+                    y: 100,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".gallery-wrapper",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+            },
+            "(max-width: 900px)": function() {
+                gsap.from(".image-container", {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".parallax-grid",
+                        start: "top 80%"
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
